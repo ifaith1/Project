@@ -29,10 +29,18 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField]
     private ContactFilter2D groundContactFilter;
 
+    private Animator myAnimator;
+
     private float horizontalInput;
     private bool isOnGround;
     private Collider2D[] groundHitDetectionResults = new Collider2D[16];
     private Checkpoint currentCheckpoint;
+    private bool facingRight = true;
+
+    private void Start()
+    {
+        myAnimator = GetComponent<Animator>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -46,6 +54,24 @@ public class PlayerCharacter : MonoBehaviour
     {
         UpdatePhysicsMaterial();
         Move();
+
+        if (horizontalInput > 0 && !facingRight)
+        {
+            Flip();
+        }
+        else if (horizontalInput < 0 && facingRight)
+        {
+            Flip();
+        }
+
+    }
+
+    private void Flip()
+    {
+        facingRight = !facingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
     }
 
     private void UpdatePhysicsMaterial()
@@ -85,6 +111,9 @@ public class PlayerCharacter : MonoBehaviour
         Vector2 clampedVelocity = rb2d.velocity;
         clampedVelocity.x = Mathf.Clamp(rb2d.velocity.x, -maxSpeed, maxSpeed);
         rb2d.velocity = clampedVelocity;
+
+        myAnimator.SetFloat("speed", Mathf.Abs(horizontalInput));
+
     }
 
     public void Respawn()
