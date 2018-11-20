@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerCharacter : MonoBehaviour 
+public class PlayerCharacter : MonoBehaviour
 {
     [SerializeField]
     private float accelerationForce = 5;
@@ -12,7 +12,14 @@ public class PlayerCharacter : MonoBehaviour
     private float maxSpeed = 5;
 
     [SerializeField]
-    private float jumpForce = 10;
+    Animator anim;
+
+    bool grounded = false;
+    public Transform groundCheck;
+    float groundRadius = 0.2f;
+    public LayerMask whatIsGround;
+    public float jumpForce = 700f;
+    //private float jumpForce = 10;
 
     [SerializeField]
     private Rigidbody2D rb2d;
@@ -40,11 +47,18 @@ public class PlayerCharacter : MonoBehaviour
     private void Start()
     {
         myAnimator = GetComponent<Animator>();
+        rb2d = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (grounded && Input.GetKeyDown(KeyCode.Space))
+        {
+            anim.SetBool("Ground", false);
+            rb2d.AddForce(new Vector2(0, jumpForce));
+        }
+
         UpdateIsOnGround();
         UpdateHorizontalInput();
         HandleJumpInput();
@@ -52,6 +66,8 @@ public class PlayerCharacter : MonoBehaviour
 
     private void FixedUpdate()
     {
+        grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
+        anim.SetBool("Ground", grounded);
         UpdatePhysicsMaterial();
         Move();
 
@@ -130,7 +146,7 @@ public class PlayerCharacter : MonoBehaviour
     public void SetCurrentCheckpoint(Checkpoint newCurrentCheckpoint)
     {
         if (currentCheckpoint != null)
-        currentCheckpoint.SetIsActivated(false);
+            currentCheckpoint.SetIsActivated(false);
 
         currentCheckpoint = newCurrentCheckpoint;
         currentCheckpoint.SetIsActivated(true);
