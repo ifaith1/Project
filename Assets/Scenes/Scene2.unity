@@ -521,8 +521,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d2462f9e42ed47099c5a3a8222783a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accelerationForce: 20
-  maxSpeed: 5
+  accelerationForce: 100
+  maxSpeed: 7
   jumpForce: 10
   rb2d: {fileID: 493261722}
   playerGroundCollider: {fileID: 493261723}
