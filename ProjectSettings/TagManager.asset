@@ -53,6 +53,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Box
+    uniqueID: 1831021045
+    locked: 0
   - name: Ground
     uniqueID: 1362925887
     locked: 0

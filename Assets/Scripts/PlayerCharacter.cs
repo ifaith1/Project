@@ -40,6 +40,17 @@ public class PlayerCharacter : MonoBehaviour
     private bool facingRight = true;
     private bool pushing;
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //if the thing we're touching is the box (has the box tag)
+        //set the ispushingbox anim permeter to true
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        //if the collision.gameobject we're going to set the ispushingbox to flase in the animator
+    }
+
     private void Start()
     {
         myAnimator = GetComponent<Animator>();
