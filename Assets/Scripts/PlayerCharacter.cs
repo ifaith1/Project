@@ -15,6 +15,9 @@ public class PlayerCharacter : MonoBehaviour
     private float jumpForce = 10;
 
     [SerializeField]
+    private float pushForce = 3;
+
+    [SerializeField]
     private Rigidbody2D rb2d;
 
     [SerializeField]
@@ -35,11 +38,13 @@ public class PlayerCharacter : MonoBehaviour
     private Collider2D[] groundHitDetectionResults = new Collider2D[16];
     private Checkpoint currentCheckpoint;
     private bool facingRight = true;
+    private bool pushing;
 
     private void Start()
     {
         myAnimator = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
+        myAnimator.SetBool("isPushing", pushing = false);
     }
 
     // Update is called once per frame
@@ -50,6 +55,7 @@ public class PlayerCharacter : MonoBehaviour
         HandleJumpInput();
 
         myAnimator.SetBool("grounded", isOnGround);
+
     }
 
     private void FixedUpdate()
@@ -107,6 +113,14 @@ public class PlayerCharacter : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isOnGround)
         {
             rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
+    }
+
+    private void HandlePushInput()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            pushing = true;
         }
     }
 

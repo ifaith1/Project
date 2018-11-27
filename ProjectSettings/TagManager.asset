@@ -47,6 +47,9 @@ TagManager:
   - name: Clouds
     uniqueID: 3869586339
     locked: 0
+  - name: Object
+    uniqueID: 2373155765
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
