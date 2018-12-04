@@ -38,24 +38,26 @@ public class PlayerCharacter : MonoBehaviour
     private Collider2D[] groundHitDetectionResults = new Collider2D[16];
     private Checkpoint currentCheckpoint;
     private bool facingRight = true;
-    private bool pushing;
+    private AudioSource audioSource;
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //if the thing we're touching is the box (has the box tag)
-        //set the ispushingbox anim permeter to true
+        if (collision.gameObject.tag == "Pushable")
+            myAnimator.SetBool("isTouchingBlock", true);
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        //if the collision.gameobject we're going to set the ispushingbox to flase in the animator
+        if (collision.gameObject.tag == "Pushable")
+            myAnimator.SetBool("isTouchingBlock", false);
     }
 
     private void Start()
     {
         myAnimator = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
-        myAnimator.SetBool("isPushing", pushing = false);
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -124,16 +126,10 @@ public class PlayerCharacter : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isOnGround)
         {
             rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            audioSource.Play();
         }
     }
 
-    private void HandlePushInput()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            pushing = true;
-        }
-    }
 
     private void Move()
     {
