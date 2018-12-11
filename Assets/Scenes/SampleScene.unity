@@ -9095,6 +9095,15 @@ Prefab:
       propertyPath: m_Name
       value: Door (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1918671232946438, guid: 21a234b95de31478a97c3e4a79432b25, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114389015830790930, guid: 21a234b95de31478a97c3e4a79432b25,
+        type: 2}
+      propertyPath: sceneToLoad
+      value: Scene3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 21a234b95de31478a97c3e4a79432b25, type: 2}
   m_IsPrefabParent: 0
