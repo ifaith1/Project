@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Pushable
   - Pickup
+  - PickUp
   layers:
   - Default
   - TransparentFX
@@ -52,9 +53,6 @@ TagManager:
   - name: Object
     uniqueID: 2373155765
     locked: 0
-  - name: Pickups
-    uniqueID: 3101897011
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
@@ -63,4 +61,7 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 1362925887
+    locked: 0
+  - name: Pickups
+    uniqueID: 3101897011
     locked: 0
